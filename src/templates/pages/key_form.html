@@ -1,0 +1,34 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Vytvoření klíče {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/key-form.css') }}">
+    <script src="{{ url_for('static', filename='js/key-form.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div style="display: flex; flex-direction: row; margin: 5%;">
+        <form method="post" class="key-form" onsubmit="createKey(event)">
+            <h2>Vytvořit API klíč <i class="fa-solid fa-key"></i></h2>
+
+            <label>
+                Název klíče
+                <input type="text" name="name" placeholder="Název klíče" maxlength="25" required>
+            </label>
+            <button class="red-button" type="submit">Vytvořit klíč</button>
+        </form>
+        <div class="key-text">
+            <p>
+                API klíč je identifikátor k ověření uživatele volajícího receptové API. Pomocí tohoto klíče můžete
+                posílat HTTP požadavky na připravené routy našeho API (viz API dokumentace) odkudkoliv.
+            </p>
+            <p>
+                Maximální počet klíčů na
+                uživatele je 5. Po vytvoření je klíč neaktivní a lze ho aktivovat v tomto webovém rozhraní v
+                uživatelském profilu (rubrika uživatel). Klíč lze případně i deaktivovat.
+            </p>
+        </div>
+    </div>
+{% endblock %}

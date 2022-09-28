@@ -1,0 +1,45 @@
+.key-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.key-form h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 30px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.key-form input {
+    height: 30px;
+    font-size: 14px;
+    width: 100%;
+    padding: 5px;
+}
+
+.key-form button {
+    margin-bottom: 20px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+.key-text {
+    width: 40%;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    gap: 10px;
+    margin: 0 5%;
+}

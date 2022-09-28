@@ -1,0 +1,179 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} {{ recipe.name }} {% endblock %}
+{% block og_image %}{{ recipe.image }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe.css') }}">
+    <script src="{{ url_for('static', filename='js/recipe.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <!-- RECIPE BODY-->
+    <div class="recipe-info-blocks-parent">
+        <div class="recipe-info-block">
+            {{ draw_recipe_image(recipe, 'recipe-image') }}
+            <div class="recipe-details">
+                <div class="title-row">
+                    <!-- NAME -->
+                    <h2>{{ recipe.name }}</h2>
+
+                    <!-- RATING -->
+                    <div class="rating" onclick="openModal()">
+                        {{ draw_rating(recipe.get_rating()) }}
+                        <h4>{{ recipe.get_rating() }}</h4>
+                    </div>
+                </div>
+                <div class="author-row">
+                    {% if recipe.is_author_anonymous %}
+                        <span class="author-name">Anonymní autor</span>
+                    {% else %}
+                        <img class="author-icon"
+                             src="{{ url_for('static', filename=recipe.author.icon) }}"
+                             alt="Autorovo foto">
+                        <span class="author-name">{{ recipe.author.nickname }}</span>
+                    {% endif %}
+                </div>
+                <div class="info-row" style="margin-top: 30px;">
+                    <div class="icon-info">
+                        <i class="fa-solid fa-scale-balanced recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                obtížnost
+                            </span>
+                            <span class="icon-value">
+                                {{ recipe.difficulty.title }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-regular fa-clock recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                doba přípravy
+                            </span>
+                            <span class="icon-value">
+                                {{ recipe.preparation_in_minutes }} minut
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-solid fa-utensils recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                počet porcí
+                            </span>
+                            <span class="icon-value">
+                                {{ recipe.servings }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-solid fa-carrot recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                vegetariánské
+                            </span>
+                            <span class="icon-value">
+                                {{ "Ano" if recipe.is_vegetarian else "Ne" }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-solid fa-leaf recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                veganské
+                            </span>
+                            <span class="icon-value">
+                                {{ "Ano" if recipe.is_vegan else "Ne" }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-solid fa-wheat-awn recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                bezlepkové
+                            </span>
+                            <span class="icon-value">
+                                {{ "Ano" if recipe.is_gluten_free else "Ne" }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="icon-info">
+                        <i class="fa-solid fa-cow recipe-info-icon"></i>
+                        <div class="icon-info-data">
+                            <span class="icon-placeholder">
+                                bez laktózy
+                            </span>
+                            <span class="icon-value">
+                                {{ "Ano" if recipe.is_lactose_free else "Ne" }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-row" style="margin-top: 60px; gap: 15px;">
+                    {% for food_type in recipe.food_types %}
+                        <div class="food-type">
+                            {{ food_type.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: row; align-self: center; width: 82%;">
+            <div class="recipe-info-small-block">
+                <h4>Ingredience</h4>
+                <ul class="recipe-ingredients">
+                    {% for ingredient in recipe.ingredients %}
+                        <li><b>{{ ingredient.ingredient.name }}</b> - {{ ingredient.value }} {{ ingredient.unit }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="recipe-info-small-block">
+                <h4>Kroky</h4>
+                <ol class="recipe-steps">
+                    {% for step in recipe.steps %}
+                        <li>{{ step.text }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- RATING MODAL -->
+    <div id="rating-modal" class="modal">
+        <form class="modal-content animate" method="post" onsubmit="rateRecipe(event, {{ recipe.recipe_id }})">
+            <div class="close-button">
+                <span onclick="closeModal()" class="close-button" title="Zavřít">×</span>
+            </div>
+            <h1>Hodnocení receptu</h1>
+            <div class="rate-recipe">
+                {% for i in range(5) %}
+                    <i id="rate-recipe-star{{ i }}" class="fa-solid fa-star"></i>
+                {% endfor %}
+            </div>
+            <div class="change-ratting">
+                <button onclick="changeRating(-1)" type="button"><i class="fa-solid fa-minus"></i></button>
+                <span id="rating-value">
+                    {% if rating is not none %}
+                        {{ rating.value }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </span>
+                <button onclick="changeRating(1)" type="button"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button class="red-button" type="submit">
+                {% if rating is not none %}
+                    Změnit hodnocení
+                {% else %}
+                    Ohodnotit
+                {% endif %}
+            </button>
+        </form>
+    </div>
+{% endblock %}

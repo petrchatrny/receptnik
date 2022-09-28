@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Webový portál pro hledání, přidávání a sdílení receptů.">
+    <meta name="keywords" content="recept, Receptník, receptník, receptnik, recepty, recipes, recipe">
+    <meta name="author" content="Lucie Pacáková, Lucie Suchánková, Petr Chatrný">
+    <meta name="robots" content="index,follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <!-- OG META DATA -->
+    <meta property="og:site_name" content="Receptník"/>
+    <meta property="og:title" content="Receptník"/>
+    <meta property="og:description" content="Webová receptová aplikace"/>
+    <meta property="og:image" content="{% block og_image %}{% endblock %}">
+    <meta property="og:url" content="{{ url_for('web.index', _external=True) }}">
+    <meta property="og:type" content="website"/>
+
+    <!-- TAB DATA -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <!-- GOOGLE LIBS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/ff19d975f3.js" crossorigin="anonymous"></script>
+
+    <!-- STATIC FILES IMPORTS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+
+    {% block imports %}{% endblock %}
+
+    {% macro draw_rating(rating) -%}
+        {% for i in range(5) %}
+            {% if i + 1 <= rating %}
+                <i class="fa-solid fa-star  rating-star-active"></i>
+            {% elif i < rating and i + 1 > rating %}
+                <i class="fa-solid fa-star-half-stroke rating-star-active"></i>
+            {% else %}
+                <i class="fa-solid fa-star"></i>
+            {% endif %}
+        {% endfor %}
+    {%- endmacro %}
+
+    {% macro draw_recipe_image(recipe, classes) -%}
+        {% if recipe.image == none %}
+            <img class="{{ classes }}"
+                 src="{{ url_for('static', filename='/img/default.png') }}"
+                 alt="{{ recipe.name }}">
+        {% else %}
+            <img class="{{ classes }}" src="{{ recipe.image }}" alt="{{ recipe.name }}">
+        {% endif %}
+    {%- endmacro %}
+
+</head>
+
+<body>
+<header>
+    <a href="{{ url_for('web.index') }}">
+        <img class="logo" src="{{ url_for('static', filename='img/logo.svg') }}" alt="logo">
+    </a>
+    <nav>
+        <ul>
+            <li {% if request.path=="/" %} class="active-link" {% endif %}>
+                <a href="{{ url_for('web.index') }}">Domů</a>
+            </li>
+
+            <li {% if request.path=="/recepty" %} class="active-link" {% endif %}>
+                <a href="{{ url_for('web.recepty') }}">Recepty</a>
+            </li>
+
+            <li {% if request.path=="/dokumentace" %} class="active-link" {% endif %}>
+                <a href="{{ url_for('web.dokumentace') }}">API dokumentace</a>
+            </li>
+            <li {% if request.path=="/uzivatel" %} class="active-link" {% endif %}>
+                <a href="{{ url_for('web.uzivatel') }}">Uživatel</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+{% block body %}
+{% endblock %}
+
+<div id="snackbar"></div>
+
+<div id="confirm-dialog" class="modal">
+    <div class="modal-content animate">
+        <h2 id="confirm-dialog-title">Smazání klíče</h2>
+        <p id="confirm-dialog-text">Opravdu chcete smazat svůj API klíč? Tento krok nelze vzít zpět.</p>
+        <div class="dialog-buttons">
+            <button id="confirm-dialog-cancel" class="gray-button" onclick="closeConfirmDialog()">Zrušit</button>
+            <button id="confirm-dialog-accept" class="red-button">Potvrdit</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

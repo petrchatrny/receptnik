@@ -1,0 +1,112 @@
+{% extends "pages/layout.html" %}
+
+{% block title %}Vytvoření receptu{% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe-form.css') }}">
+    <script src="{{ url_for('static', filename='js/recipe-form.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+{% endblock %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data" class="recipe-form" onsubmit="submitRecipeCreation(event)">
+        <h2>Vytvořit recept</h2>
+        <h3>Informace</h3>
+        <div class="table-image-line">
+            <table class="recipe-simple-data">
+                <tr>
+                    <td><i class="fa-solid fa-spoon"></i> Název receptu</td>
+                    <td><input type="text" name="name" placeholder="Název receptu" maxlength="45" required></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-regular fa-clock"></i> Doba přípravy v minutách</td>
+                    <td><input type="number" name="preparation_in_minutes" min="1" max="10000" required></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-utensils"></i> Počet porcí na zadaná ingredience</td>
+                    <td><input type="number" name="servings" min="1" max="10000" required></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-carrot"></i> Je vegetarianský?</td>
+                    <td><input type="checkbox" name="is_vegetarian"></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-leaf"></i> Je veganský?</td>
+                    <td><input type="checkbox" name="is_vegan"></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-wheat-awn"></i> Je bezlepkový?</td>
+                    <td><input type="checkbox" name="is_gluten_free"></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-cow"></i> Je bez laktózy?</td>
+                    <td><input type="checkbox" name="is_lactose_free"></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-user-secret"></i> Zůstat jako autor v anonymitě?</td>
+                    <td><input type="checkbox" name="is_author_anonymous"></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-image"></i> Fotografie</td>
+                    <td><input id="image" name="image" type="file" onchange="showThumbnail(this);"/></td>
+                </tr>
+                <tr>
+                    <td><i class="fa-solid fa-scale-balanced"></i> Obtížnost</td>
+                    <td>
+                        <select name="difficulty" id="difficulty">
+                            {% for difficulty in difficulties %}
+                                <option value="{{ difficulty.difficulty_id }}">{{ difficulty.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <p style="text-align: center;">Náhled obrázku</p>
+                <img id="thumbnail" src="{{ url_for('static', filename='img/default.png') }}" alt="Náhled obrázku">
+            </div>
+        </div>
+
+        <h3>Ingredience</h3>
+        <div id="ingredients">
+            <div class="ingredient" id="ingredient-1">
+                <label>
+                    Název
+                    <input onkeyup="autocompleteIngredient(event)" type="text" name="ingredient_name-1" maxlength="45"
+                           required>
+                </label>
+                <label>
+                    Množství
+                    <input type="number" min="1" max="10000" class="short" name="ingredient_value-1" required>
+                </label>
+                <label>
+                    Veličina
+                    <input type="text" class="short" name="ingredient_unit-1" maxlength="10" required>
+                </label>
+            </div>
+        </div>
+        <div class="add-remove-buttons">
+            <button type="button" onclick="addIngredient()">+ Ingredience</button>
+            <button type="button" onclick="removeIngredient()">- Ingredience</button>
+        </div>
+
+        <h3>Kroky</h3>
+        <ol id="steps" style="margin-left: 20px;">
+            <li id="step-1"><input type="text" name="step-1" maxlength="230" required></li>
+        </ol>
+        <div class="add-remove-buttons">
+            <button type="button" onclick="addStep()">+ Krok</button>
+            <button type="button" onclick="removeStep()">- Krok</button>
+        </div>
+
+        <div class="bottom-line">
+            <button id="create-recipe-button" class="red-button rounded-button" type="submit">Vytvořit recept</button>
+            <div id="error-message"></div>
+        </div>
+
+        <!-- TODO typy jídla -->
+    </form>
+{% endblock %}

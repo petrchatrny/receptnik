@@ -1,0 +1,55 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} {{ title }} {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block body %}
+
+    <style>
+        body {
+            height: 100% !important;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body > * {
+            flex-shrink: 0;
+        }
+
+        /** message **/
+        .message h2 {
+            text-align: left;
+            margin-top: 40px;
+            font-size: 30px;
+            font-family: 'Poppins', sans-serif;
+            margin-left: 40px;
+        }
+
+        .message p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-bottom: 80px;
+            text-align: left;
+            color: #808080;
+            margin-left: 40px;
+        }
+
+        .message .bottom-ground {
+            background-image: url({{ url_for('static', filename='/img/message_wallpaper.webp') }});
+            background-color: #cccccc;
+            height: 33em;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+
+    <div class="message">
+        <h2>{{ title }}</h2>
+        <p>
+            {{ text }}
+        </p>
+        <div class="bottom-ground"></div>
+    </div>
+
+{% endblock %}

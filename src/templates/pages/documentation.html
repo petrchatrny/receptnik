@@ -1,0 +1,362 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Dokumentace {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/documentation.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    <div class="documentation-blocks-parent">
+        <div class="documentation-block">
+
+            <section id="api-keys">
+                <h5>Získání typů jídla</h5>
+
+                <div class="url">
+                    http://www.receptnik.tk/api/food-types?<br>
+                    name=<span class="red">{name}</span>&order=<span class="red">{order}</span>&api_key=<span
+                        class="red">{APIkey}</span>
+                </div>
+
+                <table class="material-table">
+                    <tr>
+                        <h6>Parametry</h6>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap">name</code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Řetězec, který musí být obsažen v názvu typu jídla.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> order </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, jakým mají být záznamy uspořádany. Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>asc</code> vzestupně</li>
+                                <li><code>desc</code> sestupně</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> limit </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Udává maximální počet položek k zobrazení.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> format </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, v jakém se položky mají zobrazit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> api_key </code>
+                        </td>
+                        <td class="sub">
+                            povinné
+                        </td>
+                        <td>
+                            Váš unikátní API klíč, který jste si vygenerovali v naší aplikaci.
+                        </td>
+                    </tr>
+                </table>
+
+                <h5>Získání ingrediencí</h5>
+                <div class="url">
+                    http://www.receptnik.tk/api/ingredients?<br>
+                    name=<span class="red">{name}</span>&limit=<span class="red">{limit}</span>&api_key=<span
+                        class="red">{API key}</span>
+                </div>
+
+                <table class="material-table">
+                    <tr>
+                        <!--<th colspan="3">Parametry</th>-->
+                        <h6>Parametry</h6>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> name </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Řetězec, který musí být obsažen v názvu typu jídla.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> limit </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Udává maximální počet položek k zobrazení.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> format </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, v jakém se položky mají zobrazit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> api_key </code>
+                        </td>
+                        <td class="sub">
+                            povinné
+                        </td>
+                        <td>
+                            Váš unikátní API klíč, který jste si vygenerovali v naší aplikaci.
+                        </td>
+                    </tr>
+                </table>
+
+                <h5>Získání receptů</h5>
+                <div class="url">
+                    http://www.receptnik.tk/api/recipes?<br>
+                    name=<span class="red">{name}</span>&page=<span class="red">{page}</span>&api_key=<span
+                        class="red">{API key}</span>
+                </div>
+
+                <table class="material-table">
+                    <tr>
+                        <h6>Parametry</h6>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> name </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Řetězec, který musí být obsažen v názvu typu jídla.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> page </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Udává číslo stránky k načtení.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> max_preparation_time </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Zobrazení položek, jejichž doba přípravy je kratší nebo stejná jako hodnota
+                            max_preparation_time (v minutách).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> newer_than </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Zobrazí recepty, které jsou vytvořeny později, než zadané datum. Datum musí být ve formátu
+                            <span class="nowrap"> yyyy-mm-dd</span>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> is_vegan </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>true</code> Zobrazení položek, které obsahují štítek s danou volbou.</li>
+                                <li><code>false</code> Zobrazení položek, které neobsahují štítek s danou volbou.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> is_vegetarian </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>true</code> Zobrazení položek, které obsahují štítek s danou volbou.</li>
+                                <li><code>false</code> Zobrazení položek, které neobsahují štítek s danou volbou.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> is_gluten_free </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>true</code> Zobrazení položek, které obsahují štítek s danou volbou.</li>
+                                <li><code>false</code> Zobrazení položek, které neobsahují štítek s danou volbou.</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> is_lactose_free </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>true</code> Zobrazení položek, které obsahují štítek s danou volbou.</li>
+                                <li><code>false</code> Zobrazení položek, které neobsahují štítek s danou volbou.</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> difficulty </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Zobrazení položek zadané obtížnosti.
+                            Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>1</code> - Jednoduché</li>
+                                <li><code>2</code> - Střední</li>
+                                <li><code>3</code> - Náročné</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> order_by </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, jakým mají být záznamy uspořádany podle kritéria "název receptu". Možné hodnoty:
+                            <ul class="docs-list">
+                                <li><code>name</code> podle názvu</li>
+                                <li><code>rating</code> podle hodnocení</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> format </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, v jakém se položky mají zobrazit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> api_key </code>
+                        </td>
+                        <td class="sub">
+                            povinné
+                        </td>
+                        <td>
+                            Váš unikátní API klíč, který jste si vygenerovali v naší aplikaci.
+                        </td>
+                    </tr>
+                </table>
+
+                <h5>Získání konkrétního receptu </h5>
+                <div class="url">
+                    http://www.receptnik.tk/api/recipes/&lt;id&gt;?<br>format=<span
+                        class="red">{format}</span>&api_key=<span class="red">{API key}</span>
+                </div>
+
+                <table class="material-table">
+                    <tr>
+                        <!--<th colspan="3">Parametry</th>-->
+                        <h6>Parametry</h6>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> format </code>
+                        </td>
+                        <td class="sub">
+                            nepovinné
+                        </td>
+                        <td>
+                            Způsob, v jakém se položky mají zobrazit.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code class="nowrap"> api_key </code>
+                        </td>
+                        <td class="sub">
+                            povinné
+                        </td>
+                        <td>
+                            Váš unikátní API klíč, který jste si vygenerovali v naší aplikaci.
+                        </td>
+                    </tr>
+                </table>
+
+
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Recepty {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe-list.css') }}">
+    <script src="{{ url_for('static', filename='js/recipe-list.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="recipe-list">
+        <form id="search-form" onsubmit="submitSearch(event)">
+            <div class="search-bar">
+                <div class="search-input-button">
+                    <input class="search-field" type="text" name="name" placeholder="Hledat">
+                    <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <button type="button" onclick="changeFiltersVisibility()" class="search-form-buttons">
+                    <i class="fa-solid fa-filter"></i>
+                </button>
+                <a href="{{ url_for('web.vytvoreni_receptu') }}" class="search-form-buttons"><i
+                        class="fa-solid fa-plus"></i></a>
+            </div>
+
+            <div id="filters" class="filters">
+                <h2>Filtry</h2>
+                <label class="filter-label">
+                    <span>Obtížnost</span>
+                    <select name="difficulty" id="difficulty">
+                        <option value="-1">-</option>
+                        {% for difficulty in difficulties %}
+                            <option value="{{ difficulty.difficulty_id }}">{{ difficulty.title }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label class="filter-label">
+                    <span>Maximální doba přípravy</span>
+                    <input id="max-preparation-time" name="max_preparation_time" type="range"
+                           value="{{ max_preparation_time }}" min="1" max="{{ max_preparation_time }}"
+                           oninput="updateMaxPreparationTime()">
+                    <output id="max-preparation-time-value"></output>
+                </label>
+
+                <label class="filter-label">
+                    <span>Přidáno po</span>
+                    <input type="date" name="newer_than" id="newer-than"
+                           min="{{ min_creation_date }}"
+                           value="{{ min_creation_date }}"
+                           max="{{ today }}">
+                </label>
+
+                <div class="filter-label">
+                    <span>Pro koho recept je</span>
+                    <div class="filter-multicheck">
+                        <label>
+                            Vegetariánský
+                            <input type="checkbox" name="is_vegetarian">
+                        </label>
+                        <label>
+                            Veganský
+                            <input type="checkbox" name="is_vegan">
+                        </label>
+                        <label>
+                            Bezlepkový
+                            <input type="checkbox" name="is_gluten_free">
+                        </label>
+                        <label>
+                            Bez laktózy
+                            <input type="checkbox" name="is_lactose_free">
+                        </label>
+                    </div>
+                </div>
+
+                <label class="filter-label">
+                    <span>Řazení</span>
+                    <select name="order_by" id="order-by">
+                        <option value="name">Název</option>
+                        <option value="rating">Hodnocení</option>
+                    </select>
+                </label>
+
+                <div class="filters-buttons">
+                    <button class="gray-button" type="button" onclick="location.reload();">Zrušit</button>
+                    <button class="red-button" type="submit" onclick="changeFiltersVisibility()">Filtrovat</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="recipes" id="recipes">
+            <!-- DATA INJECTED BY JS -->
+            <!--
+                Hello Mr. Valovič, if you are reading this Easter egg,
+                here is little message for ya: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                Hope you will get this old meme. Have a nice day!⠀⠀⠀⠀⠀
+            -->
+        </div>
+
+        <button id="load-more-button" class="red-button rounded-button" type="button" onclick="loadMore()">
+            Zobrazit více
+        </button>
+        <i id="loading-animation" class='fas fa-circle-notch fa-spin'></i>
+    </div>
+
+{% endblock %}

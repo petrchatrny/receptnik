@@ -1,0 +1,142 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Uživatelský profil {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <script src="{{ url_for('static', filename='js/user.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="profile-box">
+        <div class="account-info">
+            <div class="profile-subpart">
+                <img src="{{ url_for('static', filename=user.icon) }}" alt="uživatelský obrázek">
+            </div>
+            <div class="profile-subpart">
+                <div class="profile-line">
+                    <h4><i class="fa-solid fa-user profile-icon"></i> Uživatelské jméno</h4>
+                    <span class="profile-value">{{ user.nickname }}</span>
+                </div>
+                <div class="profile-line">
+                    <h4><i class="fa-solid fa-at profile-icon"></i> Email</h4>
+                    <span class="profile-value">{{ user.email }}</span>
+                </div>
+                <div class="profile-line">
+                    <h4><i class="fa-solid fa-calendar profile-icon"></i> Datum registrace</h4>
+                    <span class="profile-value">{{ user.get_registration_date_in_czech_format() }}</span>
+                </div>
+                <div class="profile-line">
+                    <h4><i class="fa-solid fa-utensils profile-icon"></i> Počet mých receptů</h4>
+                    <span class="profile-value">{{ user.recipes|length }}</span>
+                </div>
+                <!--
+                <div class="profile-line">
+                    <h4><i class="fa-solid fa-star profile-icon"></i> Průměrné hodnocení mých receptů</h4>
+                    <span class="profile-value">{{ user.get_recipes_avg_rating() }}</span>
+                </div>-->
+            </div>
+            <form class="profile-subpart" method="post">
+                <button type="button" class="add-button"
+                        onclick="changePage('{{ url_for( 'web.vytvoreni_klice') }}')">
+                    <i class="fa-solid fa-key"></i> Nový klíč
+                </button>
+
+                <button type="button" class="add-button"
+                        onclick="changePage('{{ url_for( 'web.vytvoreni_receptu') }}')">
+                    <i class="fa-solid fa-utensils"></i> Nový recept
+                </button>
+
+                <button type="submit" formaction="api/users/logout">
+                    <i class="fa-solid fa-power-off"></i> Odhlásit se
+                </button>
+
+                <button type="button" class="delete" onclick="showDeleteUserDialog(event, {{ user.user_id }})">
+                    <i class="fa-solid fa-trash-can"></i> Smazat účet
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="profile-content-box" style="justify-content: flex-start; padding: 0">
+        <div class="tab-layout">
+            <div class="tab active-tab" id="recipes-tab" onclick="openTab('recipes')">
+                <i class="fa-solid fa-utensils profile-icon"></i> Mé recepty
+            </div>
+            <div class="tab" id="keys-tab" onclick="openTab('keys')">
+                <i class="fa-solid fa-key"></i> API klíče
+            </div>
+        </div>
+
+        <table class="data-table" id="recipes-table">
+            <thead>
+            <tr>
+                <th>Obrázek</th>
+                <th>Název</th>
+                <th class="centered-cell">Upravit</th>
+                <th class="centered-cell">Smazat</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set recipes_rendered = false %}
+            {% for recipe in user.recipes %}
+                {% set recipes_rendered = true %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('web.recept', recept_id=recipe.recipe_id) }}">
+                            {{ draw_recipe_image(recipe, 'table-image') }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('web.recept', recept_id=recipe.recipe_id) }}">
+                            {{ recipe.name }}
+                        </a>
+                    </td>
+                    <td class="centered-cell">
+                        <a href="{{ url_for('web.uprava_receptu', recipe_id=recipe.recipe_id) }}">
+                            <i class="fa-solid fa-pen-to-square edit-icon"></i>
+                        </a>
+                    </td>
+                    <td class="centered-cell">
+                        <i onclick="showDeleteRecipeDialog(event, {{ recipe.recipe_id }})"
+                           class="fa-solid fa-trash-can delete-icon"></i>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <table class="data-table" id="keys-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Název</th>
+                <th>Hash</th>
+                <th class="centered-cell">Aktivní</th>
+                <th class="centered-cell">Smazat</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key in user.api_keys %}
+                <tr>
+                    <td><i class="fa-solid fa-key"></i></td>
+                    <td>{{ key.name }}</td>
+                    <td class="api-key-hash" onclick="copyKeyToClipboard(event)">{{ key.hash }}</td>
+                    <td class="centered-cell">
+                        <label class="switch">
+                            <input type="checkbox" {{ "checked" if key.is_active }}
+                                   onclick="changeApiKeyActivation(event, {{ key.api_key_id }})">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td class="centered-cell">
+                        <i class="fa-solid fa-trash-can delete-icon"
+                           onclick="showDeleteKeyDialog(event, {{ key.api_key_id }})"></i>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+.url {
+    background-color: #F2F2F2;
+    font-family: monospace;
+    font-size: 20px;
+    width: fit-content;
+    padding: 8px;
+}
+
+.red {
+    color: crimson;
+}
+
+.documentation {
+    color: #333333;
+    font-family: sans-serif;
+    padding: 10px 20px;
+    flex-direction: column;
+
+}
+
+h5 {
+    padding: 15pt;
+}
+
+h6 {
+    margin: 10px;
+}
+
+.documentation-blocks-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 0 0 0 0;
+    margin-top: 50px
+}
+
+.documentation-block {
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    margin: 20px;
+    width: 80%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    font-family: "Poppins", sans-serif;
+    align-self: center;
+    padding: 20px;
+}
+
+.nowrap {
+    border: 1px solid #D0D0D6;
+    padding: 2pt 4pt;
+    margin: 0 10pt;
+    flex-direction: column;
+
+}
+
+.sub {
+    padding-left: 20px;
+    padding-right: 80px;
+    padding-top: 10px;
+    flex-direction: column;
+    color: #8a8a8a;
+}
+
+.docs-list {
+    padding: 2pt 4pt;
+    margin: 0 25pt;
+    flex-direction: column;
+}

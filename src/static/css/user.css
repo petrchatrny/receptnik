@@ -1,0 +1,317 @@
+.profile-box {
+    width: 60%;
+    margin: 30px auto auto;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 400px;
+    padding: 0 10px;
+}
+
+.account-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-self: self-end;
+}
+
+.profile-buttons button {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: Poppins, serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 16px;
+    cursor: pointer;
+    width: auto;
+    font-weight: bold;
+}
+
+.update {
+    background-color: #2E7DBF;
+    border: 1px solid #2E7DBF;
+    color: white;
+}
+
+.delete {
+    background-color: crimson;
+    border: 1px solid crimson;
+    color: white;
+}
+
+.logout {
+
+}
+
+.profile-subpart {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.profile-subpart img {
+    width: 180px;
+    height: auto;
+    align-self: center;
+    border-radius: 90px;
+    padding: 5px;
+    border: 1px solid;
+}
+
+.profile-line {
+    margin: 14px 0;
+}
+
+.profile-line h4 {
+    font-size: 18px;
+    font-family: Poppins, serif;
+    font-weight: normal;
+}
+
+.profile-value {
+    font-size: 16px;
+    font-family: Poppins, serif;
+    color: #808080;
+}
+
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    width: 20%
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.profile-nav-box {
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    padding: 42px;
+}
+
+.profile-nav-box span {
+    margin-top: 8px;
+}
+
+.profile-nav-box img {
+    width: 80px;
+    height: 80px;
+}
+
+.profile-icon {
+    font-size: 20px;
+}
+
+/*  TAB LAYOUT */
+.tab-layout {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 30px;
+}
+
+.tab {
+    font-family: Poppins, serif;
+    font-size: 23px;
+    width: 50%;
+    text-align: center;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 2px solid black;
+}
+
+.active-tab {
+    border-bottom: 4px solid #dc143c;
+    cursor: default;
+}
+
+.profile-content-box {
+    width: 60%;
+    margin: 30px auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 400px;
+    padding: 0 10px;
+}
+
+/* DATA TABLE */
+.data-table {
+    border-spacing: 0;
+    box-shadow: 5px 4px 30px rgb(0 0 0 / 10%);
+    background: #fff;
+    transition: all .5s;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    margin: 0 30px 20px 30px;
+}
+
+.data-table a {
+    text-decoration: none;
+    color: black;
+}
+
+.centered-cell {
+    text-align: center !important;
+}
+
+.data-table td, th {
+    padding: 15px 10px;
+    font-size: 17px;
+    color: black;
+    text-align: left;
+}
+
+.data-table thead {
+    background: linear-gradient(45deg, #f1f1f1, #dadada);
+}
+
+.data-table thead tr a {
+    border-radius: 10px 10px 0 0;
+}
+
+.data-table th {
+    letter-spacing: 1px;
+}
+
+.data-table thead td {
+    color: #fff;
+    font-size: 20px;
+}
+
+.data-table thead td:first-of-type {
+    border-radius: 10px 0 0 0;
+}
+
+.data-table thead td:last-of-type {
+    border-radius: 0 10px 0 0;
+}
+
+.data-table tbody td {
+    border-top: 1px solid #f0f0f0;
+}
+
+.data-table tbody tr:hover {
+    background: rgba(123, 153, 218, .1);
+}
+
+.table-image {
+    width: 70px;
+    height: 70px;
+}
+
+.edit-icon {
+    font-size: 22px;
+    color: #2E7DBF;
+}
+
+.delete-icon {
+    font-size: 22px;
+    color: crimson;
+}
+
+.api-key-hash {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+.user-data-error-message {
+    align-self: center;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 60px;
+    font-size: 20px;
+}
+
+#keys-table {
+    display: none;
+}
+
+.add-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.profile-subpart button {
+    width: 50%;
+    align-self: center;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+}
+
+/* SWITCH CHECKBOX */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    width: 50px;
+    height: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}

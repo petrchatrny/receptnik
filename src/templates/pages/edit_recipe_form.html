@@ -1,0 +1,14 @@
+{% extends "pages/layout.html" %}
+
+{% block title %}Úprava receptu{% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recipe-form.css') }}">
+    <script src="{{ url_for('static', filename='js/recipe-form.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <h1>Úprava receptu - {{ recipe.name }}</h1>
+    <h2 style="text-align: center;">W.I.P. - work in progress</h2>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Stránka nenalezena {% endblock %}
+
+{% block body %}
+    <div class="error-body">
+        <h3>404 - Stránka nenalezena</h3>
+        <img src="{{ url_for('static', filename='img/empty_plate.webp') }}" alt="error obrázek">
+    </div>
+{% endblock %}

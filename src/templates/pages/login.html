@@ -1,0 +1,39 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Přihlášení {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="form-block">
+        <div class="heading-line">
+            <h2>Přihlášení</h2>
+            <div class="status">
+                <div class="status-icon"></div>
+                <div class="status-message"></div>
+            </div>
+        </div>
+        <form method="post" onsubmit="login(event)">
+            <label>
+                Email
+                <input name="email" type="email" placeholder="Email" required>
+            </label>
+            <label>
+                Heslo
+                <input name="password" type="password" placeholder="Heslo" required>
+            </label>
+            <div class="button-line">
+                <button type="submit" class="red-button submit-button">Přihlásit se</button>
+                <div>
+                    <a href="{{ url_for('web.registrace') }}">Nemáte ještě účet? Zaregistrujte se</a>
+                    <br>
+                    <a href="{{ url_for('web.obnova_hesla') }}">Zapomenuté heslo?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

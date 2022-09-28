@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cs" dir="ltr">
+
+<head>
+    <title>Potvrzení registrace</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Webový portál pro hledání, přidávání a sdílení receptů.">
+    <meta name="keywords" content="recept, Receptník, receptník, receptnik, recepty, recipes, recipe">
+    <meta name="author" content="Lucie Pacáková, Lucie Suchánková, Petr Chatrný">
+    <meta name="robots" content="index,follow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <style>
+        body {
+            background-color: whitesmoke;
+            margin-left: 10px;
+        }
+
+        .text {
+            margin-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        a {
+            color: #DC143CFF;
+        }
+
+        a:hover {
+            color: #FF3F6AFF;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="text">
+    <img src="{{ logo }}" width="35%" height="35%">
+    <p>Dobrý den,</p>
+    <p>děkujeme, že jste se zaregistrovali v aplikaci Receptník</p>
+    <p>Pro aktivaci svého účtu, klikněte prosím na <a href="{{ link }}">tento odkaz</a>.</p>
+    <p>Platnost tohoto odkazu je 1 hodina.</p>
+</div>
+
+<p>Tým Receptník 🍲</p>
+</body>
+</html>

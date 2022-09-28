@@ -1,0 +1,21 @@
+.parallax {
+    min-height: 600px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 20px;
+}
+
+.favorite-recipes {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-evenly;
+    margin: 20px 20px 45px;
+}
+
+.favorite-recipes a, .favorite-recipes a:visited {
+    text-decoration: none;
+    color: black;
+}

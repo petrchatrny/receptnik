@@ -1,0 +1,47 @@
+{% extends "pages/layout.html" %}
+
+{% block title %} Registrace {% endblock %}
+{% block og_image %}{{ request.url_root[:-1] + url_for('static', filename='img/square_meta_image.png') }}{% endblock %}
+
+{% block imports %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-register.css') }}">
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="form-block">
+        <!-- HEADING -->
+        <div class="heading-line">
+            <h2>Registrace</h2>
+            <div class="status">
+                <div class="status-icon"></div>
+                <div class="status-message"></div>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <form method="post" onsubmit="register(event)">
+            <label>
+                Uživatelské jméno
+                <input name="nickname" type="text" placeholder="Uživatelské jméno" maxlength="45" required>
+            </label>
+            <label>
+                Email
+                <input name="email" type="email" placeholder="Email" required>
+            </label>
+            <label>
+                Heslo
+                <input name="password" type="password" placeholder="Heslo" required>
+            </label>
+            <label>
+                Heslo znovu
+                <input name="password_confirm" type="password" placeholder="Heslo znovu" required>
+            </label>
+            <div class="button-line">
+                <button type="submit" class="red-button submit-button">Zaregistrovat se</button>
+                <a href="{{ url_for('web.prihlaseni') }}">Již účet máte? Přihlašte se</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

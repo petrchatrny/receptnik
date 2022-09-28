@@ -1,0 +1,26 @@
+{% for recipe in recipes %}
+    <a class="recipe" href="{{ url_for('web.recept', recept_id=recipe.recipe_id) }}">
+        <div class="center-cropped-image">
+            {% if recipe.image == none %}
+                <img src="{{ url_for('static', filename='/img/default.png') }}" alt="{{ recipe.name }}">
+            {% else %}
+                <img src="{{ recipe.image }}" alt="{{ recipe.name }}">
+            {% endif %}
+        </div>
+        <div class="label">
+            <h2>{{ recipe.name }}</h2>
+            <div class="rating">
+                {% for i in range(5) %}
+                    {% if i + 1 <= recipe.get_rating() %}
+                        <i class="fa-solid fa-star  rating-star-active"></i>
+                    {% elif i < recipe.get_rating() and i + 1 > recipe.get_rating() %}
+                        <i class="fa-solid fa-star-half-stroke rating-star-active"></i>
+                    {% else %}
+                        <i class="fa-solid fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+                <h4>{{ recipe.get_rating() }}</h4>
+            </div>
+        </div>
+    </a>
+{% endfor %}
