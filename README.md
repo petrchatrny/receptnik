@@ -9,7 +9,6 @@
 - V API si uživatelé mohou vytvořit svůj přístupový klíč a používat tak naši aplikaci pro své vlastní vývojářské účely.
 - API slouží výhradně pro získávání receptů ve formě JSON/XML - nelze přes něj recepty mazat, vytvářet upravovat či
   hodnotit.
-- Aplikace produkčně běží zde: http://www.receptnik.tk
 
 ## Autoři
 
@@ -25,8 +24,7 @@
 | Backend        | ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)                                                                                                                                                                                                                                              |
 | Development DB | ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)                                                                                                                                                                                                                                                                                                                                               |
 | Production DB  | ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)                                                                                                                                                                                                                                                                                                                                       |
-| Server         | ![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)                                                                                                                                                                                                                                                                                                                                           |
-| Hosting        | ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)                                                                                                                                                                                                                                                                                                                                               |
+| Server         | ![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=for-the-badge&logo=gunicorn&logoColor=white)                                                                                                                                                                                     
 
 ## Sestavení aplikace
 
