@@ -16,7 +16,7 @@
                 <h5>Získání typů jídla</h5>
 
                 <div class="url">
-                    http://www.receptnik.tk/api/food-types?<br>
+                    {{ url }}api/food-types?<br>
                     name=<span class="red">{name}</span>&order=<span class="red">{order}</span>&api_key=<span
                         class="red">{APIkey}</span>
                 </div>
@@ -88,7 +88,7 @@
 
                 <h5>Získání ingrediencí</h5>
                 <div class="url">
-                    http://www.receptnik.tk/api/ingredients?<br>
+                    {{ url }}api/ingredients?<br>
                     name=<span class="red">{name}</span>&limit=<span class="red">{limit}</span>&api_key=<span
                         class="red">{API key}</span>
                 </div>
@@ -146,7 +146,7 @@
 
                 <h5>Získání receptů</h5>
                 <div class="url">
-                    http://www.receptnik.tk/api/recipes?<br>
+                    {{ url }}api/recipes?<br>
                     name=<span class="red">{name}</span>&page=<span class="red">{page}</span>&api_key=<span
                         class="red">{API key}</span>
                 </div>
@@ -322,7 +322,7 @@
 
                 <h5>Získání konkrétního receptu </h5>
                 <div class="url">
-                    http://www.receptnik.tk/api/recipes/&lt;id&gt;?<br>format=<span
+                    {{ url }}api/recipes/&lt;id&gt;?<br>format=<span
                         class="red">{format}</span>&api_key=<span class="red">{API key}</span>
                 </div>
 
@@ -354,8 +354,6 @@
                         </td>
                     </tr>
                 </table>
-
-
             </section>
         </div>
     </div>

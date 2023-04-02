@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Blueprint, render_template, session, redirect, url_for, abort, current_app
+from flask import Blueprint, render_template, session, redirect, url_for, abort, current_app, request
 from itsdangerous import SignatureExpired
 from sqlalchemy import desc
 from sqlalchemy import func as db_func
@@ -47,7 +47,8 @@ def recept(recept_id):
 
 @web.get("/dokumentace")
 def dokumentace():
-    return render_template("pages/documentation.html")
+    root_url = request.url_root
+    return render_template("pages/documentation.html", url=root_url)
 
 
 @web.get("/uzivatel")
